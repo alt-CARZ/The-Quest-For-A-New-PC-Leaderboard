@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Tells the browser the text format is UTF-8 and controls how well the webpage fits on different screen sizes -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Sets the title and logo of the webpage, and links it to the stylesheet -->
+  <title>The Quest For A PC</title>
+  <link rel="icon" href="{{ url_for('static', filename='laptop.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+
+<body>
+  <!-- Header of the webpage -->
+  <header class="page-header">
+    <span class="left-item">
+      <img class="logo" src="{{ url_for('static', filename='laptop.png') }}" alt="PC Quest Logo" />
+      <h1 id="title">The Quest For A PC</h1>
+    </span>
+    <nav id="contents" class="center-item" aria-label="Group project navigation">
+      <a href="{{ url_for('home_page') }}" class="hyperlink animated-hyperlink"><i>Home</i></a>
+      <a href="#" class="hyperlink animated-hyperlink" style="background-color: darkred"><i
+          style="color: gray">Leaderboard</i></a>
+    </nav>
+    <span class="right-item">
+      <h2 id="home-text">Back to Home</h2>
+      <img class="logo" src="{{ url_for('static', filename='no.png') }}" alt="Exit Icon" />
+    </span>
+  </header>
+
+  <!-- The main contents of the webpage -->
+  <main>
+    <br>
+    <h2 class="subheading">Leaderboard</h2>
+    <br>
+    <!--The section to submit your leaderboard entry (minimised by default) -->
+    <div class="flex-container-center">
+      <h3 class="sub-subheading">Submit Your Score</h3>
+      <button onclick="toggleForm()" type="button" class="button animated-hyperlink" id="toggle-form-btn">&gt;</button>
+    </div>
+    <form method="POST" class="floating-section" id="score-form" action="/">
+      <div class="columns" id="form">
+        <div>
+          <div class="flex-container-left">
+            <button type="button" class="button animated-hyperlink" onclick="openDialog('name-dialog')">?</button>
+            <label class="info-label" for="name">Username:</label>
+          </div>
+          <br><br>
+          <div class="flex-container-left">
+            <button type="button" class="button animated-hyperlink" onclick="openDialog('score-dialog')">?</button>
+            <label class="info-label" for="score">Time:</label>
+          </div>
+          <br><br>
+          <div class="flex-container-left">
+            <button type="button" class="button animated-hyperlink" onclick="openDialog('multiplier-dialog')">?</button>
+            <label class="info-label" for="multiplier">Multiplier:</label>
+          </div>
+        </div>
+        <div>
+          <input class="info-input" type="text" id="name" name="name" required placeholder="Username"
+            autocomplete="name">
+          <br>
+          <h5 id="warning">Username already exists. If this is you, then the better
+            end score will be used. If this is not you, please use a different username. <br> (click to close)</h5>
+          <br>
+          <input class="info-input" type="number" id="score" name="score" required
+            placeholder="Time (seconds, max 9999)" min="0" max="9999" step="0.01" />
+          <br><br>
+          <input class="info-input" type="number" id="multiplier" name="multiplier" required placeholder="Multiplier"
+            min="0.1" max="2" step="0.1" />
+          <br><br>
+        </div>
+      </div>
+      <br>
+      <button type="submit" class="button">Submit Score</button>
+    </form>
+
+    <br>
+    <br>
+    <!-- The section to view the leaderboard-->
+    <h2 class="sub-subheading">Current Standings</h2>
+    <br>
+    <label for="userSearch">Search Username:</label>
+    <input id="userSearch" autocomplete="off">
+    <br><br>
+    <form method="GET" action="/">
+      <label for="order-type">Sort By</label>
+      <!--Basically because when you reorder it reloads it makes it stay selected after page reloads-->
+      <select id="order-type" name="sort_by" onchange="this.form.submit()">
+        <option value="end-score" {% if sort_by=='end-score' %}selected{% endif %}>End Time</option>
+        <option value="base-score" {% if sort_by=='base-score' %}selected{% endif %}>Base Time</option>
+      </select>
+    </form>
+
+    <div id="scoreboard-wrapper">
+      <table id="scoreboard">
+        <thead>
+          <tr>
+            <th>RANK</th>
+            <th>USERNAME</th>
+            <th>END TIME</th>
+            <th>BASE TIME</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for name, net_score, score in entries %}{% set rank = loop.index if sort_by=='end-score' or
+          sort_by=='base-score' else loop.length - loop.index + 1 %}
+          <tr>
+            <td>{{ rank }}</td>
+            <td class="name">{{ name }}</td>
+            <td {% if sort_by=='end-score' or sort_by=='end-scoredesc' %}class="selected" {% endif %}>{{ score }}</td>
+            <td {% if sort_by=='base-score' or sort_by=='base-scoredesc' %}class="selected" {% endif %}>{{ net_score }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer of the page -->
+  <hr style="border-color: #ff00c4" />
+
+  <footer class="site-footer">
+    <section class="columns">
+      <div>
+        <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+          Back to top ⬆
+        </button>
+      </div>
+      <div>
+        <img src="{{ url_for('static', filename='mascot.png') }}" class="mascot" alt="Gamedev Club Gamedevs Mascot"
+          width="200" onclick="alert('Meow')" />
+      </div>
+      <div>
+        <p><b>Gamedev Club Gamedevs</b></p>
+        <h6>You Think It. We Built It!</h6>
+      </div>
+    </section>
+    <hr style="border-color: #ff00c4" />
+    <br>
+    <h5>© 2026 Gamedev Club Gamedevs. No Rights Reserved</h5>
+  </footer>
+
+  <!-- The dialogues for the help menu-->
+  <dialog id="name-dialog">
+    <h3>Username Help</h3>
+    <br>
+    <p>
+      The username is the name that will be displayed on the scoreboard. It
+      can be any name you like, but it must be unique. If you repeat a
+      username, your best entry will override your past entries.
+    </p>
+    <br><br>
+    <button onclick="closeDialog('name-dialog')" class="button">Close</button>
+  </dialog>
+  <dialog id="score-dialog">
+    <h3>Time Help</h3>
+    <br>
+    <p>
+      The time is the time it took you to complete the game. It must be a
+      number between 0 and 9999, and at most 2 decimal places. If you enter a
+      time that is not a number, or is outside of this range, your entry will
+      be rejected.
+    </p>
+    <br><br>
+    <button onclick="closeDialog('score-dialog')" class="button">
+      Close
+    </button>
+  </dialog>
+  <dialog id="multiplier-dialog">
+    <h3>Multiplier Help</h3>
+    <br>
+    <p>
+      The multiplier is your time multiplier that is given to you by the game
+      at the end of the run. If it does not, you can calculate it with:
+    </p>
+    <br>
+    <kbd>Multiplier = 1 + (fails * 0.1) - (grade * 0.1)</kbd>
+    <br>
+    <p>
+      Fails is the fail count of the entire run, displayed at the end of the
+      game. <br>
+      The grade is your numeric rating of performance. You gain +1 on your
+      grade for every achievement and extra content you have successfully
+      obtained in the run. If you forget the grade you got, just count the
+      number of achievements and extra content you obtained.
+    </p>
+    <br><br>
+    <button onclick="closeDialog('multiplier-dialog')" class="button">
+      Close
+    </button>
+  </dialog>
+
+  <!-- Link to the JavaScript file -->
+  <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>

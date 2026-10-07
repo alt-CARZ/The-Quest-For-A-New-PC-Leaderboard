@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Tells the browser the text format is UTF-8 and controls how well the webpage fits on different screen sizes -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Sets the title and logo of the webpage, and links it to the stylesheet -->
+    <title>The Quest For A PC</title>
+    <link rel="icon" href="{{ url_for('static', filename='laptop.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <!-- Header of the webpage -->
+    <header class="page-header">
+        <span class="left-item">
+            <img class="logo" src="{{ url_for('static', filename='laptop.png') }}" alt="PC Quest Logo" />
+            <h1 id="title">The Quest For A PC</h1>
+        </span>
+        <nav id="contents" class="center-item" aria-label="Group project navigation">
+            <a href="#" class="hyperlink animated-hyperlink" style="background-color: darkred"><i
+                    style="color: gray">Home</i></a>
+            <a href="{{ url_for('leaderboard') }}" class="hyperlink animated-hyperlink"><i>Leaderboards</i></a>
+        </nav>
+        <span class="right-item">
+            <h2 id="home-text">Back to Home</h2>
+            <img class="logo" src="{{ url_for('static', filename='no.png') }}" alt="Exit Icon" />
+        </span>
+    </header>
+
+
+    <br>
+
+    <!-- About the game -->
+    <main class="content">
+        <br>
+        <h1 class="subheading">About The Game</h1>
+
+        <section class="section">
+            <p>
+                <i>The Quest For A PC</i> is a fast-paced indie game that has taken the internet by storm, earning
+                praise from top YouTubers like Markiplier and reviewers from The New York Times.
+                <br><br>
+                Your ultimate goal? To buy a powerful new PC to play Geometry Jump -- an incredibly graphics-heavy
+                game that requires split-second precision. Navigate an open-world internet packed with intricate puzzles
+                and challenges. Track your stats, unlock unique achievements, and make choices carefully -- because
+                every
+                decision counts.
+            </p>
+
+            <br>
+            <hr>
+            <br>
+        </section>
+
+        <!-- How to play -->
+        <h1 class="subheading">How to play</h1>
+
+        <section class="floating-section">
+            <ol style="text-align: left;">
+                <li>
+                    <h3>Interact and Explore</h3>
+                    <br>
+                    <p>Use your mouse to browse, interact, and download files on a completely procedurally generated
+                        internet, in this point and click game</p>
+                </li>
+                <br><br>
+                <li>
+                    <h3>Solve and Adapt</h3>
+                    <br>
+                    <p>Overcome interactive puzzles and learn complex digital survival techniques as you progress. The
+                        introductory tutorial chapter teaches you all the baseline skills required to get that PC you
+                        need so desperately.</p>
+                </li>
+                <br><br>
+                <li>
+                    <h3>Upgrade and Hunt</h3>
+                    <br>
+                    <p>Unlock harder files, bypass superior security systems, and dig up the cheapest hardware deals
+                        online to build your dream machine.</p>
+                </li>
+            </ol>
+            <br>
+        </section>
+        <br>
+        <hr>
+        <br>
+
+
+        <!-- Educational purpose of the game -->
+        <h1 class="subheading">Educational purpose</h1>
+
+        <section class="section">
+            <p>
+                <b>The Quest For A PC</b> provides a safe, sandbox simulation to help you recognize and defeat
+                real-world
+                digital threats.
+            </p>
+            <br><br>
+            <h2 class="sub-subheading">What you can learn!</h2>
+            <br>
+            <ul>
+                <li><b>Spotting threats:</b> Learn to find and overcome malware, scams, and phishers.</li>
+                <br>
+                <li><b>Master defence:</b> Learn to white hat hack and implement it within controlled, safe
+                    environments.</li>
+                <br>
+                <li><b>Code your own site:</b> Unlock online interactivity, create your own website, and host it on our
+                    sandbox internet for free!</li>
+                <br>
+                <li><b>Challenge friends:</b> Create websites that challenge friends to test their white hat hacking, or
+                    danger evasion abilities!</li>
+            </ul>
+            <br><br>
+            <hr>
+            <br>
+        </section>
+
+
+        <!-- Free game previews -->
+        <h1 class="subheading">Free Game Preview</h1>
+        <br>
+        <h5 class="footnote">This is a lite version. This restricts gameplay to only the tutorial</h5>
+        <br>
+        <section class="floating-section preview" id="downloads">
+            <h3 class="sub-subheading">WEBSITE LINK</h3>
+            <a href="https://scratch.mit.edu/projects/1322320223/" target="_blank">
+                scratch.mit.edu/projects/1322320223/
+            </a>
+            <br><br><br>
+            <h3 class="sub-subheading">DOWNLOAD LINK - </h3>
+
+            <a download href="The quest for a PC.sb3" target="_blank">
+                The Quest For A PC.sb3
+            </a>
+            <br>
+            <br>
+        </section>
+        <br>
+        <p>Tutorial preview</p>
+        <img class="gameplayscreen" src="{{ url_for('static', filename='QFAP preview.jpeg') }}"
+            alt="Tutorial Screen Preview for the game 'The quest for a PC', abbreviated as QFAQ">
+        <br><br>
+        <hr><br>
+
+        <!-- System requirements -->
+        <h1 class="subheading">System requirements</h1>
+
+        <section class="floating-section">
+            <h2 class="sub-subheading">Lite Version</h2>
+            <ul>
+                <li><b>Allocated Ram:</b> 1.5GB allocated ram</li>
+                <br>
+                <li><b>Processor: </b> 1.6Ghz dual core or faster</li>
+                <br>
+                <li><b>Graphics: </b> Basic graphics with hardware acceleration</li>
+                <br>
+                <li><b>Operating system: </b> windows10+ or macOS 10.13+</li>
+            </ul>
+            <br>
+            <h2 class="sub-subheading">Full Version</h2>
+            <ul>
+                <li><b>Allocated Ram:</b> 4GB allocated ram</li>
+                <br>
+                <li><b>Processor: </b> 2.5Ghz dual core or faster</li>
+                <br>
+                <li><b>Graphics: </b> 4GB VRAM</li>
+                <br>
+                <li><b>Operating system: </b> windows10+ or macOS 10.13+</li>
+            </ul>
+
+        </section>
+        <br>
+        <hr><br>
+        <h1 class="subheading">Love our first impressions?</h1>
+
+        <section class="section">
+            <p>Purchase the full edition of this game, along with our other hit titles, in our heavily discounted
+                <i><b>Cyber Bundle!</b></i> Discount will end soon so make sure to be quick!
+            </p>
+            <br>
+            <h2 class="sub-subheading">Only $110.00 for 3 games!</h2>
+            <br>
+            <button class="animated-hyperlink hyperlink bundle-button"><b>Buy the
+                    <i>CyberBundle </i>Now!</b></button>
+        </section>
+        <br>
+    </main>
+
+    <!-- Footer of the page -->
+    <hr color="#ff00c4">
+    <footer class="site-footer">
+        <section class="columns">
+            <div>
+                <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Back to top ⬆</button>
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='mascot.png') }}" class="mascot"
+                    alt="Gamedev Club Gamedevs Mascot" width=200px onclick="alert('Meow')">
+            </div>
+            <div>
+                <p><b>Gamedev Club Gamedevs</b></p>
+                <h6>You Think It. We Built It!</h6>
+            </div>
+        </section>
+        <br><br>
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="games.html">Games</a>
+            <a href="Checkout.html">Checkout</a>
+            <a href="Albarr-Main.html">QFAP</a>
+            <a href="Muhammad-Main.html">CyberMatch</a>
+            <a href="Aarav-Main.html">Data Deal</a>
+        </nav>
+        <br>
+        <hr color="#ff00c4">
+        <br>
+        <h5>© 2026 Gamedev Club Gamedevs. No Rights Reserved</h5>
+    </footer>
+    <script>
+        history.scrollRestoration = 'manual'
+        window.scrollTo(0, 0);
+    </script>
+    <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>
